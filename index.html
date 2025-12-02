@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Count</title>
+  </head>
+  <body>
+
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js">
+    </script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+    </script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/@babel/standalone/babel.min.js">
+    </script>
+
+    <script type="text/babel">
+
+
+
+        const Number = ({value}) => {
+            return <span>{value}</span>
+        }
+
+        const Button = ({text , update , value}) => {
+            
+            const execute = () => {
+                switch (text){
+                    case "Decrement":
+                        return update(value - 1);
+                    case "Reset":
+                        return update(0);
+                    case "Increase":
+                        return update(value + 1);
+                } 
+            }
+
+            return <button onClick={execute}>{text}</button>;
+        }
+
+        const Box = ({children}) => {   //props = obj      props{children:""}       Box = ({children}) Estou pegando a propriedade children dentro do obj props
+            return <div>{children}</div>
+        }
+
+        // const Box = (props) => {
+        //     return <div>{props.children}</div>
+        // }
+
+        const App = () => {
+
+            const [currentState , setCurrentState] = React.useState(0);
+
+            return (
+                <>
+                    <h1>Count</h1>
+                    <Number value={currentState}/>
+                    <Box>
+                        <Button 
+                          text="Decrement" 
+                          update={setCurrentState}
+                          value={currentState}
+                        />
+
+                        <Button 
+                          text="Reset" 
+                          update={setCurrentState}
+                          value={currentState}
+                        />
+
+                        <Button 
+                          text="Increase" 
+                          update={setCurrentState}
+                          value={currentState}
+                        />
+                    </Box>
+                </>
+            );
+        };
+
+        const root = document.getElementById('root');
+
+        ReactDOM.createRoot(root).render(<App/>);
+
+    </script>
+
+  </body>
+</html>
